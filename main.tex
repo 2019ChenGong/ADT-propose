@@ -16,6 +16,7 @@
 \usepackage{longtable}
 \usepackage{pifont}
 \usepackage{color}
+\usepackage{cite}
 
 \allowdisplaybreaks
 
@@ -24,6 +25,7 @@
 \usepackage{tikz}
 \newcommand*{\circled}[1]{\lower.7ex\hbox{\tikz\draw (0pt, 0pt)%
     circle (.5em) node {\makebox[1em][c]{\small #1}};}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
 % \begin{figure}[H]
 %     \centering
@@ -62,23 +64,61 @@
 \maketitle
 
 \section{Summary}
-\subsection{Key Idea}
+Currently, Deep Reinforcement Learning (DRL) has been widely applied in various fields, 
+and shows superior performance on video games, such as Atari 2600 games \cite{silver_mastering_2016}, Go \cite{mnih_human-level_2015}, StarCraft \RNum{2} \cite{vinyals2019grandmaster} and so on.
+Besides, combining DRL with adversarial attacks, 
+an adversary could force a well-trained agent to behave abnormally by perturbing the input of agent’s
+policy network or training an adversarial agent to exploit the weakness of the victim \cite{adt}.
+
 In this paper, authors extends a reinforcement learning algorithm (Proximal Policy Optimization, PPO) to guide the training of the adversarial agent in the two-agent competitive game setting.
 The main contributions are concluded as follows,
 \begin{enumerate}
-    \item The attack mechanism is the first work that can effectively exploit the weakness of victim agents without manipulation of the environment, explicit knowledge of the opponent policy network and state-transition model.
-    So this attack mechanism, is practical, and trains an adversarial agent in an effective and efficient fashion. 
-    \item To facilitate the search of the adversarial policy network, 
+    \item \textbf{Strong Practicality:} In many recent research works, they assume an attack has the privilege to manipulate the environment freely, and explicit knowledge to the opponent agent policy \cite{xiao2019characterizing}. 
+    However, these attacks are not practical in the real world. Although the new attack against RL is designed without manipulation of environment\cite{vinyals2019grandmaster}, 
+    this newly method usually shows a relatively low success rate of failing the opponent agent. This is because the attack is a simple application of the PPO, and PPO does not train an agent for exploiting the weakness of the opponent agent.
+    
+    The attack mechanism is the first work that can effectively exploit the weakness of victim agents without manipulation of the environment, explicit knowledge of the opponent policy network and state-transition model.
+    So this attack mechanism is practical, and trains an adversarial agent in an effective and efficient fashion. 
+    \item \textbf{Explainable AI Technique:} To facilitate the search of the adversarial policy network, 
     authors adjust the weight of the action deviation based on by how much the victim agent pays attention to the action of the action of the adversarial.
     The weight is estimated by an explainable AI technique.
-    \item Authors conduct experiments using MuJoCo and roboschool Pong to evaluation their attack. Compared with the SOTA technique,
-    the adversarial agent exhibits a much stronger capability in exploiting the weakness of victim agents. 
+    \item \textbf{SOTA Performance:} Authors conduct experiments using MuJoCo and roboschool Pong to evaluation their attack. Compared with the SOTA technique \cite{gleave2019adversarial},
+    the adversarial agent exhibits a much stronger capability in exploiting the weakness of victim agents (an average of 60\% vs. 50\% winning rate for
+    MuJoCo game and 100\% vs. 90\% for the Pong game). The attack method in this paper can conduct an adversarial agent with a 50\% winning rate in fewer sampling (11 million vs. 20
+    million iterations for MuJoCo game, and 1.0 million vs. 1.3 million iterations for Pong game).
     Besides, adversarial attack shows less variation in the training process.
 \end{enumerate}
 
+This paper extends a SOTA reinforcement learning algorithm to guide the training of the adversarial agent in the two-agent competitive game setting. However, there are also some disadvantages: 
+1. the attack method can only be applied to the two-agent competitive game setting; 
+2. the approximation of the world model and opponent agent policy using deep neural network is so complex. 
 
 
-\subsection{Algorithm Design}
+
+
+
+\section{My Reflections}
+\begin{enumerate}
+    \item \textbf{Software Engineering Testing:} Analysis the Reinforcement Learning Algorithms by Software Engineering Methods.
+    \item \textbf{Meta Reinforcement Learning: }there is a problem that whether an adversarial policy network trained against one practical opponent agent could also be used to defeat the other agents trained differently but serving for the same reinforcement learning task. 
+    Meta reinforcement learning may be an ideal solution. Meta-RL is meta-learning on reinforcement learning tasks. After trained over a distribution of tasks, the agent is able to solve a new task by developing a new RL algorithm.
+    
+    A good meta-learning model is expected to generalize to new tasks or new environments that have never been encountered during training. 
+    The adaptation process, essentially a mini learning session, happens at test with limited exposure to the new configurations.
+    The meta RL includes two sections, meta-training and meta-adaptation. Meta learning process learns knowledge from the past Markov decision process.
+    Meta adaptation is that how to quickly change the network to adapt a new task \cite{wang2016learning}. So meta RL may have the potential of solving the transferability of adversarial environments.
+    
+    \item \textbf{Multi-Agent Reinforcement Learning: }we can extend the attack mechanism to multi-agent environments, where multiple participants collaborate or compete with each other.
+    When multiple agents interact with the environment at the same time, the system becomes a multi-agent system. Each agent still follows the goal of reinforcement learning, that is, to maximize the cumulative return. 
+    The transition of the state of the environment is related to the joint actions of all agents so that the influence of the joint actions should be considered.
+    Can we extend the multi-agent RL algorithms to study the attack methods in multi-agent environments?
+\end{enumerate}
+
+\clearpage
+\bibliographystyle{ieeetran}
+\bibliography{mybib}
+
+\section*{Appendix}
 In this section, I introduce the details in algorithm. This method extend the PPO loss function $L_\text{PPO}$ a new loss term
 \begin{equation}
     L_\text{ad}=\operatorname{maximize}_{\theta}\left(\left\|\hat{a}_{v}^{(t+1)}-a_{v}^{(t+1)}\right\|_{1}-\left\|\hat{o}_{v}^{(t+1)}-o_{v}^{(t+1)}\right\|_{1}\right),
@@ -116,13 +156,5 @@ The $\lambda$ in step time $t$ is defined as
 where $\tilde{g}^{(t)} = \sum_{j=1:q} g_{ij}^{(t)}$, and $g^{(t)_{ij}} = \nabla_{(o^{(t)}_i} F(o^{(t)}_v)_j$. 
 In $o^{(t)}_v$, if the corresponding observation dimensions indicate the actions of adversarial agent, we assign 1 to the
 corresponding element in $M$, and the rest is assign to 0.
-
-
-\section{My Reflections}
-\begin{enumerate}
-    \item Analysis the Reinforcement Learning Algorithms by Software Engineering Methods.
-    \item Meta Reinforcement Learning
-    \item Multi-Agent Reinforcement Learning.
-\end{enumerate}
 
 \end{document}
