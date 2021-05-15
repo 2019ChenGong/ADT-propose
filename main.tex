@@ -90,23 +90,27 @@ The main contributions are concluded as follows,
 \end{enumerate}
 
 This paper extends a SOTA reinforcement learning algorithm to guide the training of the adversarial agent in the two-agent competitive game setting. However, there are also some disadvantages: 
-1. the attack method can only be applied to the two-agent competitive game setting; 
-2. the approximation of the world model and opponent agent policy using deep neural network is so complex. 
-
+The attack method can only be applied to the two-agent competitive game setting.
 
 
 
 
 \section{My Reflections}
 \begin{enumerate}
-    \item \textbf{Software Engineering Testing:} Analysis the Reinforcement Learning Algorithms by Software Engineering Methods.
-    \item \textbf{Meta Reinforcement Learning: }there is a problem that whether an adversarial policy network trained against one practical opponent agent could also be used to defeat the other agents trained differently but serving for the same reinforcement learning task. 
-    Meta reinforcement learning may be an ideal solution. Meta-RL is meta-learning on reinforcement learning tasks. After trained over a distribution of tasks, the agent is able to solve a new task by developing a new RL algorithm.
+    \item \textbf{Distributional Reinforcement Learning:} Value distribution means the distribution of the random return received by the distribution of the random return received by a reinforcement learning agent. 
+    This is in contrast to the common approach to reinforcement learning which models the expectation of this return, or value \cite{bellemare_distributional_2017}. 
+    Distributional reinforcement learning focuses on the learning of value distribution, which has many advantages: 1. it applies more decision information (i.e., for some risk-sensitive tasks, we may choose actions that have a lower variance or a better worst-case scenario than actions that have a higher mean); 2. it alleviates the problem of reward sparsity, and sparse rewards are more likely to be retained during propagation;
+    3. for some states that appear to be the same in representation, there may be two completely different value functions, and if only the mean value is considered, the information will be completely confused (i.e., $\mathcal{N}(0,0.1)$ and $\mathcal{N}(0,10)$).
+
+    Fortunately, the advantages of distributional reinforcement learning can solve many problems in adversarial attack, so maybe distributional reinforcement learning can achieve better performance in adversarial attack.
+    \item \textbf{Meta Reinforcement Learning: }there is a problem that whether an adversarial policy network trained against one practical opponent agent could also be used to defeat the other agents trained differently after simple training, but serving for the same reinforcement learning task. 
+    Meta reinforcement learning (Meta RL) may be an ideal solution. Meta-RL is meta-learning on reinforcement learning tasks. After trained over a distribution of tasks, the agent is able to solve a new task by developing a new RL algorithm.
     
     A good meta-learning model is expected to generalize to new tasks or new environments that have never been encountered during training. 
-    The adaptation process, essentially a mini learning session, happens at test with limited exposure to the new configurations.
     The meta RL includes two sections, meta-training and meta-adaptation. Meta learning process learns knowledge from the past Markov decision process.
-    Meta adaptation is that how to quickly change the network to adapt a new task \cite{wang2016learning}. So meta RL may have the potential of solving the transferability of adversarial environments.
+    Meta adaptation is that how to quickly change the network to adapt a new task \cite{wang2016learning}. 
+    So in our problem, meta RL algorithms can make an adversarial agent attack different opponent agents in the same environment to learning the meta knowledge,
+    and the adversarial agent defeats an opponent agent that it never encounters after simple training.
     
     \item \textbf{Multi-Agent Reinforcement Learning: }we can extend the attack mechanism to multi-agent environments, where multiple participants collaborate or compete with each other.
     When multiple agents interact with the environment at the same time, the system becomes a multi-agent system. Each agent still follows the goal of reinforcement learning, that is, to maximize the cumulative return. 

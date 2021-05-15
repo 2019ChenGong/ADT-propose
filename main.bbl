@@ -52,6 +52,13 @@ A.~Gleave, M.~Dennis, C.~Wild, N.~Kant, S.~Levine, and S.~Russell,
   ``Adversarial policies: Attacking deep reinforcement learning,'' \emph{arXiv
   preprint arXiv:1905.10615}, 2019.
 
+\bibitem{bellemare_distributional_2017}
+M.~G. Bellemare, W.~Dabney, and R.~Munos, ``A {Distributional} {Perspective} on
+  {Reinforcement} {Learning},'' in \emph{Proceedings of the 34th
+  {International} {Conference} on {Machine} {Learning} - {Volume} 70}, ser.
+  {ICML}'17.\hskip 1em plus 0.5em minus 0.4em\relax Sydney, NSW, Australia:
+  JMLR.org, 2017, pp. 449--458.
+
 \bibitem{wang2016learning}
 J.~X. Wang, Z.~Kurth-Nelson, D.~Tirumala, H.~Soyer, J.~Z. Leibo, R.~Munos,
   C.~Blundell, D.~Kumaran, and M.~Botvinick, ``Learning to reinforcement

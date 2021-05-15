@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.7.16)  14 MAY 2021 22:08
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.7.16)  15 MAY 2021 22:13
 entering extended mode
 **d:/Desktop/ADT-propose/main
 (d:/Desktop/ADT-propose/main.tex
@@ -1147,15 +1147,15 @@ Package CJKpunct Info: punctuation spaces for family 'zhsong' do not exist. Use 
 
 ] [4] (d:\Desktop\ADT-propose\main.aux) ) 
 Here is how much of TeX's memory you used:
- 19973 strings out of 495354
- 343677 string characters out of 3183859
- 386337 words of memory out of 3000000
- 22660 multiletter control sequences out of 15000+200000
+ 19974 strings out of 495354
+ 343708 string characters out of 3183859
+ 386340 words of memory out of 3000000
+ 22661 multiletter control sequences out of 15000+200000
  12423 words of font info for 48 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  56i,12n,55p,856b,879s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/WINDOWS/Fonts/simsun.ttc><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (4 pages, 188411 bytes).
+Output written on main.pdf (4 pages, 191946 bytes).
 PDF statistics:
  83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
