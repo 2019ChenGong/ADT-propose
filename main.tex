@@ -1,5 +1,5 @@
 \documentclass[a4paper]{article}
-\usepackage[UTF8]{ctex}
+% \usepackage[UTF8]{ctex}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{url}
@@ -64,11 +64,7 @@
 \maketitle
 
 \section{Summary}
-Currently, Deep Reinforcement Learning (DRL) has been widely applied in various fields, 
-and shows superior performance on video games, such as Atari 2600 games \cite{silver_mastering_2016}, Go \cite{mnih_human-level_2015}, StarCraft \RNum{2} \cite{vinyals2019grandmaster} and so on.
-Besides, combining DRL with adversarial attacks, 
-an adversary could force a well-trained agent to behave abnormally by perturbing the input of agent’s
-policy network or training an adversarial agent to exploit the weakness of the victim \cite{adt}.
+Currently, Deep Reinforcement Learning (DRL) has been widely applied in various fields, and shows superior performance on video games, such as Atari 2600 games \cite{silver_mastering_2016}, Go \cite{mnih_human-level_2015}, StarCraft \RNum{2} \cite{vinyals2019grandmaster} and so on. Besides, combining DRL with adversarial attacks, an adversary could force a well-trained agent to behave abnormally by perturbing the input of agent’s policy network or training an adversarial agent to exploit the weakness of the victim \cite{adt}.
 
 In this paper, authors extends a reinforcement learning algorithm (Proximal Policy Optimization, PPO) to guide the training of the adversarial agent in the two-agent competitive game setting.
 The main contributions are concluded as follows,
@@ -95,31 +91,22 @@ The attack method can only be applied to the two-agent competitive game setting.
 
 
 
-\section{My Reflections}
+\section{Potential directions to explore}
 \begin{enumerate}
-    \item \textbf{Distributional Reinforcement Learning:} Value distribution means the distribution of the random return received by the distribution of the random return received by a reinforcement learning agent. 
-    This is in contrast to the common approach to reinforcement learning which models the expectation of this return, or value \cite{bellemare_distributional_2017}. 
-    Distributional reinforcement learning focuses on the learning of value distribution, which has many advantages: 1. it applies more decision information (i.e., for some risk-sensitive tasks, we may choose actions that have a lower variance or a better worst-case scenario than actions that have a higher mean); 2. it alleviates the problem of reward sparsity, and sparse rewards are more likely to be retained during propagation;
-    3. for some states that appear to be the same in representation, there may be two completely different value functions, and if only the mean value is considered, the information will be completely confused (i.e., $\mathcal{N}(0,0.1)$ and $\mathcal{N}(0,10)$).
+    \item \textbf{Distributional Reinforcement Learning for Exploring Weakness of Opponent:} 
+    The goal of conventional reinforcement learning is to maximize the $Q$ values, which is the expectation of the accumulative returns, denoted by $Z$. However, the distribution of $Z$ is critical to the robustness of agents, indicating under what situations (states) agents perform well or poorly. The states with low distributional values can be vulnerabilities of agents. Distributional reinforcement learning \cite{bellemare_distributional_2017} aims to learn value distribution rather than the expected values. There are several advantages: (1). it applies more decision information (i.e., for some risk-sensitive tasks, we may choose actions that have a lower variance or a better worst-case scenario than actions that have a higher mean); and (2). it alleviates the problem of reward sparsity, and sparse rewards are more likely to be retained during propagation. 
 
-    Fortunately, the advantages of distributional reinforcement learning can solve many problems in adversarial attack, so maybe distributional reinforcement learning can achieve better performance in adversarial attack.
-    \item \textbf{Meta Reinforcement Learning: }there is a problem that whether an adversarial policy network trained against one practical opponent agent could also be used to defeat the other agents trained differently after simple training, but serving for the same reinforcement learning task. 
-    Meta reinforcement learning (Meta RL) may be an ideal solution. Meta-RL is meta-learning on reinforcement learning tasks. After trained over a distribution of tasks, the agent is able to solve a new task by developing a new RL algorithm.
+    On the one hand, distributional reinforcement learning is a way to train more robust agents. On the other hand, it can also be used as adversarial attacks to conventional RL agents by exploring the opponent's worst-case scenarios.
+
+    \item \textbf{Meta Reinforcement Learning for Stronger Transferability: } 
+    The paper also mentions some future work to explore the transferability: whether an adversarial policy network trained against one opponent agent could also be used to defeat the other agents. We can take one step further: adopting meta reinforcement learning (Meta RL) to enhance the transferability of adversarial agents. Meta-RL applies meta-learning ideas to reinforcement learning tasks. A good meta-learning model is expected to generalize to new tasks or new environments that have never been encountered during training. The meta RL includes two sections, meta-training and meta-adaptation. Meta-learning process learns knowledge from the past Markov decision process. Meta adaptation is that how to quickly change the network to adapt to a new task \cite{wang2016learning}. In our problem, meta RL algorithms can make an adversarial agent attack different opponent agents in the same environment, or the adversarial agent only requires simple retraining to be able to defeat an opponent agent that it never encounters.
     
-    A good meta-learning model is expected to generalize to new tasks or new environments that have never been encountered during training. 
-    The meta RL includes two sections, meta-training and meta-adaptation. Meta learning process learns knowledge from the past Markov decision process.
-    Meta adaptation is that how to quickly change the network to adapt a new task \cite{wang2016learning}. 
-    So in our problem, meta RL algorithms can make an adversarial agent attack different opponent agents in the same environment to learning the meta knowledge,
-    and the adversarial agent defeats an opponent agent that it never encounters after simple training.
-    
-    \item \textbf{Multi-Agent Reinforcement Learning: }we can extend the attack mechanism to multi-agent environments, where multiple participants collaborate or compete with each other.
-    When multiple agents interact with the environment at the same time, the system becomes a multi-agent system. Each agent still follows the goal of reinforcement learning, that is, to maximize the cumulative return. 
-    The transition of the state of the environment is related to the joint actions of all agents so that the influence of the joint actions should be considered.
-    Can we extend the multi-agent RL algorithms to study the attack methods in multi-agent environments?
+    \item \textbf{Adversarial Attack for Multi-Agent Reinforcement Learning: }
+    We can extend the attack mechanism to multi-agent environments, where multiple participants collaborate or compete with each other. When multiple agents interact with the environment at the same time, the system becomes a multi-agent system. Each agent still follows the goal of reinforcement learning, that is, to maximize the cumulative return. The transition of the state of the environment is related to the joint actions of all agents so that the influence of the joint actions should be considered. Can we extend the multi-agent RL algorithms to study the attack methods in multi-agent environments?
 \end{enumerate}
 
 \clearpage
-\bibliographystyle{ieeetran}
+\bibliographystyle{plain}
 \bibliography{mybib}
 
 \section*{Appendix}
